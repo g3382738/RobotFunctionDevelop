@@ -1,0 +1,31 @@
+VoxForge & Julius Quick Start.
+
+This Tar file contains everything you need to get Julius working:
+ * Julius Run-time engine executable;
+ * VoxForge Acoustic Model files;
+ * VoxForge sample Grammar files.
+
+Simply extract the gzipped tar file to a directory, and execute the following command:
+ 
+ $./julius -input mic -C Sample.jconf
+
+For information on the Julius grammar syntax, see the enclosed GRAMMAR_NOTES.
+
+We still need much more speech to create decent quality Acoustic Models.  So 
+please take the time to submit some transcribed speech to www.voxforge.org.
+
+thanks,
+
+the VoxForge team.
+
+Errors:
+if you get the following error
+
+  ### read waveform input
+  ALSA lib dlmisc.c:252:(snd1_dlobj_cache_get) Cannot open shared library /usr/lib/alsa-lib/libasound_module_pcm_pulse.so
+  Error: adin_alsa: cannot open PCM device "default" (No such device or address)
+  failed to begin input stream
+  
+You need to install the .686 version of the pulseaudio ALSA plugins:
+
+  # yum install alsa-plugins-pulseaudio.i686

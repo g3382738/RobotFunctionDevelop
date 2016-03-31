@@ -1,0 +1,41 @@
+import pexpect 
+import ctypes 
+import api 
+import os 
+import time
+import sys 
+import struct 
+
+if __name__ == "__main__":
+        try:
+                if api.Initialize():
+                        print("Initialized")
+                else:
+                        print("Initialzation Failed")
+        except KeyboardInterrupt:
+                api.ServoShutdown()
+                sys.exit()
+        except():
+                api.ServoShutdown()
+                sys.exit()
+        child = pexpect.spawn ('julius -input mic -C /home/pi/voxforge/quickstart/Sample.jconf')
+        while True:
+                try:
+                        idx = child.expect(['SIT', 'STAND', 'STOP', 'WALK'])
+                        if idx == 0:
+                                api.PlayAction(15);
+                                print "Sit"
+                        elif idx == 1:
+                                api.PlayAction(8);
+                                print "Stand up"
+                        elif idx == 2:
+                                api.Walk(-1);
+                                print "Stop"
+                        elif idx == 3:
+                                api.Walk(1);
+				api.Walkmove(1);
+                                print "Walk"
+
+                except KeyboardInterrupt:
+                        child.close(force=True)
+                        break
